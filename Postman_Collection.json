@@ -1,0 +1,308 @@
+{
+  "info": {
+    "_postman_id": "c1a2b3d4-campus-lost-found-collection-v2",
+    "name": "Campus Lost and Found Portal API (with Auth)",
+    "description": "Complete collection of REST API endpoints including Authentication (Register, Login, Profile) and Item CRUD operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - 1. Register User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Sahil Sharma\",\n  \"email\": \"sahil.student@college.edu\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "auth", "register"]
+        },
+        "description": "Create a new student or faculty account with hashed password and JWT token."
+      },
+      "response": []
+    },
+    {
+      "name": "Auth - 2. Login User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"sahil.student@college.edu\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "auth", "login"]
+        },
+        "description": "Authenticate user with email and password to receive JWT token."
+      },
+      "response": []
+    },
+    {
+      "name": "Auth - 3. Get Logged In User Profile",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer YOUR_JWT_TOKEN_HERE"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/auth/me",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "auth", "me"]
+        },
+        "description": "Retrieve current logged in user details using JWT Bearer token."
+      },
+      "response": []
+    },
+    {
+      "name": "Upload - Upload Photo from Device",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "description": "Select an image file (JPG, PNG, WEBP) from your device"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/upload",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "upload"]
+        },
+        "description": "Upload a photo from phone/computer using Multer and return the saved image URL."
+      },
+      "response": []
+    },
+    {
+      "name": "Items - 0. Root Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": [""]
+        },
+        "description": "Check if backend server is up and running."
+      },
+      "response": []
+    },
+    {
+      "name": "Items - 1. Create New Item (Lost)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Black Leather Wallet\",\n  \"description\": \"Lost my black leather wallet near the library with College ID card.\",\n  \"category\": \"Bags & Wallets\",\n  \"type\": \"Lost\",\n  \"location\": \"Central Library 2nd Floor\",\n  \"date\": \"2024-10-20\",\n  \"contact\": \"Sahil - 9876543210 (sahil@college.edu)\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1627123424574-724758594e93?w=500\",\n  \"status\": \"Open\",\n  \"reportedBy\": \"Sahil Sharma\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/items",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "items"]
+        },
+        "description": "Create and save a new item in MongoDB."
+      },
+      "response": []
+    },
+    {
+      "name": "Items - 2. Get All Items",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/items",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "items"]
+        },
+        "description": "Fetch all items from MongoDB sorted by newest first."
+      },
+      "response": []
+    },
+    {
+      "name": "Items - 3. Search Items by Title",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/items?search=wallet",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "items"],
+          "query": [
+            {
+              "key": "search",
+              "value": "wallet"
+            }
+          ]
+        },
+        "description": "Perform case-insensitive title search."
+      },
+      "response": []
+    },
+    {
+      "name": "Items - 4. Filter Items (Type and Status)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/items?type=Lost&status=Open",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "items"],
+          "query": [
+            {
+              "key": "type",
+              "value": "Lost"
+            },
+            {
+              "key": "status",
+              "value": "Open"
+            }
+          ]
+        },
+        "description": "Filter by item type and status."
+      },
+      "response": []
+    },
+    {
+      "name": "Items - 5. Get Single Item by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/items/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "items", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "REPLACE_WITH_ACTUAL_MONGODB_ID"
+            }
+          ]
+        },
+        "description": "Fetch single item by MongoDB ID."
+      },
+      "response": []
+    },
+    {
+      "name": "Items - 6. Update Item / Change Status",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"Returned\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/items/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "items", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "REPLACE_WITH_ACTUAL_MONGODB_ID"
+            }
+          ]
+        },
+        "description": "Update item status or fields."
+      },
+      "response": []
+    },
+    {
+      "name": "Items - 7. Delete Item by ID",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/items/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "items", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "REPLACE_WITH_ACTUAL_MONGODB_ID"
+            }
+          ]
+        },
+        "description": "Delete item document from MongoDB."
+      },
+      "response": []
+    },
+    {
+      "name": "Items - 8. Get My Reported Items",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer YOUR_JWT_TOKEN_HERE"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/items/my-items",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "items", "my-items"]
+        },
+        "description": "Fetch items reported by the currently authenticated user."
+      },
+      "response": []
+    }
+  ]
+}

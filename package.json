@@ -1,0 +1,23 @@
+{
+  "name": "campus-lost-and-found-portal",
+  "version": "1.0.0",
+  "description": "Full-stack Campus Lost and Found Portal using MERN Stack with Authentication",
+  "scripts": {
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue.bold,green.bold\" \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "start": "concurrently -n \"SERVER,CLIENT\" -c \"blue.bold,green.bold\" \"npm start --prefix server\" \"npm run dev --prefix client\"",
+    "seed": "npm run seed --prefix server",
+    "install-all": "npm install && npm install --prefix server && npm install --prefix client"
+  },
+  "keywords": [
+    "mern",
+    "react",
+    "express",
+    "mongodb",
+    "authentication"
+  ],
+  "author": "College Student",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

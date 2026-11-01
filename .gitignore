@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment Secrets (Never commit database passwords!)
+.env
+server/.env
+*.env.local
+
+# Production & Build outputs
+dist/
+client/dist/
+
+# Operating System & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Uploaded media test files
+server/uploads/item-*
+!server/uploads/.gitkeep
