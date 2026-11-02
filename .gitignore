@@ -21,3 +21,6 @@ Thumbs.db
 # Uploaded media test files
 server/uploads/item-*
 !server/uploads/.gitkeep
+
+# Moodle submission text file (local only)
+MERN_Project_CEC_Submission.txt
